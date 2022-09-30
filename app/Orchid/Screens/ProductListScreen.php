@@ -47,7 +47,7 @@ class ProductListScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'All products';
+        return 'All products. Total: (' . Product::all()->count() . ')';
     }
 
     /**

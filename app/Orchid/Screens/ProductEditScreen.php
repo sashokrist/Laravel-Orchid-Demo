@@ -52,7 +52,7 @@ class ProductEditScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Edit product'. $this->product->title;
+        return 'Edit product: '. $this->product->title;
     }
 
     /**

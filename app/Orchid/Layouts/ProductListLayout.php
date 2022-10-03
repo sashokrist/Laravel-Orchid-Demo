@@ -3,15 +3,20 @@
 namespace App\Orchid\Layouts;
 
 use App\Models\Product;
+use App\Orchid\Screens\ProductListScreen;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Layouts\Legend;
 use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Layouts\Table;
+use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
+use Orchid\Support\Facades\Layout;
 
 class ProductListLayout extends Table
 {
@@ -33,7 +38,11 @@ class ProductListLayout extends Table
     protected function columns(): iterable
     {
         return [
-            TD::make('title', 'Title')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
+            TD::make('title', 'Title')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort()
+                ->render(function (Product $product){
+                    return Link::make($product->title)
+                        ->route('platform.products.show', $product->id);
+                }),
             TD::make('description', 'Description')->width('150px')->cantHide(),
             TD::make('price', 'Price')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
             TD::make('image', 'Image')->width('150px')->cantHide(),

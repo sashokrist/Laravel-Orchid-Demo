@@ -105,6 +105,7 @@ class ProductEditScreen extends Screen
      */
     public function save(Request $request, Product $product)
     {
+       // dd($request->all());
         $request->validate([
             'product.title' => [ 'required'],
             'product.description' => [ 'required'],

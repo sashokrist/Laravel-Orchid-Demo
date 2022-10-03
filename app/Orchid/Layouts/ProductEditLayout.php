@@ -31,8 +31,17 @@ class ProductEditLayout extends Rows
             Input::make('product.id')->type('hidden'),
             Input::make('product.title')->required()->title('Title'),
             Input::make('product.description')->required()->title('Description'),
-            Input::make('product.price')->type('number')->required()->title('Price'),
-            Picture::make('product.image')->required()->title('Image'),
+           // Input::make('product.price')->type('number')->required()->title('Price'),
+            Input::make('product.price')
+                ->title('Price')
+                ->mask([
+                    'alias' => 'currency',
+                    'prefix' => '£',
+                    'groupSeparator' => ' ',
+                    'digitsOptional' => true,
+                ]),
+
+        Picture::make('product.image')->required()->title('Image'),
         ];
     }
 }

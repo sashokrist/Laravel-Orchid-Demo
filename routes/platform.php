@@ -12,6 +12,7 @@ use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\ProductEditScreen;
 use App\Orchid\Screens\ProductListScreen;
+use App\Orchid\Screens\ProductShowScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -112,7 +113,7 @@ Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.ex
 Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
 Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
-Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
+///Route::screen(ExampleFieldsAdvancedScreen::class, 'example-advanced')->name('platform.example.advanced');
 
 //Product
 Route::screen('products/{product}/edit', ProductEditScreen::class)
@@ -121,6 +122,14 @@ Route::screen('products/{product}/edit', ProductEditScreen::class)
         return $trail
             ->parent('platform.products')
             ->push(__('Product'), route('platform.products.edit', $product));
+    });
+
+Route::screen('products/{product}/show', ProductShowScreen::class)
+    ->name('platform.products.show')
+    ->breadcrumbs(function (Trail $trail, $product) {
+        return $trail
+            ->parent('platform.products')
+            ->push(__('Product'), route('platform.products.show', $product));
     });
 
 Route::screen('products/create', ProductEditScreen::class)

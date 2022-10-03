@@ -11,6 +11,7 @@ use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Screen;
+use Orchid\Screen\Sight;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
@@ -57,6 +58,22 @@ class ProductListScreen extends Screen
     {
         return [
             'platform.products.list',
+        ];
+    }
+
+
+    /**
+     * Get the sights displayed by the resource.
+     *
+     * @return Sight[]
+     */
+    public function legend(): array
+    {
+        return [
+            Sight::make('id'),
+            Sight::make('title'),
+            Sight::make('description'),
+            Sight::make('price'),
         ];
     }
 

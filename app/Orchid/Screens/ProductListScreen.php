@@ -101,9 +101,7 @@ class ProductListScreen extends Screen
     {
         return [
             ProductListLayout::class,
-
             Layout::modal('addProduct', ProductEditLayout::class)->async('asyncGetProduct'),
-
 //            Layout::modal('asyncEditProductModal', ProductEditLayout::class)
 //                ->async('asyncGetProduct'),
         ];

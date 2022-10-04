@@ -41,7 +41,7 @@ class ProductListLayout extends Table
             TD::make('title', 'Title')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort()
                 ->render(function (Product $product){
                     return Link::make($product->title)
-                        ->route('platform.products.show', $product->id);
+                        ->route('platform.products.show', $product->id)->icon('eye');
                 }),
             TD::make('description', 'Description')->width('150px')->cantHide(),
             TD::make('price', 'Price')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),

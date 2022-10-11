@@ -20,8 +20,16 @@ class JokeService
 
     public function getRandomTen()
    {
-       // dd($response->body());  //$response->body()
-        $this->response = Http::acceptJson()->get('https://official-joke-api.appspot.com/random_ten');
+       $randomTen = 'random_ten';
+       $random = 'random_joke';
+        $this->response = Http::acceptJson()->get('https://official-joke-api.appspot.com/' . $randomTen);
+        return $this;
+    }
+
+    public function getRandom()
+    {
+        $this->response = Http::acceptJson()->get('https://official-joke-api.appspot.com/random_joke');
+       // dd($this);
         return $this;
     }
 
@@ -50,7 +58,7 @@ class JokeService
 
     /**
      * Get paginated result data
-     * 
+     *
      * @param string $key       Data key to fetch items from API response, default `data`.
      * @param int $perPage      Number of items per page, default 15.
      * @param int $page         Current page

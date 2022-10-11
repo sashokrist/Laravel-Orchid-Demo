@@ -46,7 +46,11 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('Jokes'))
                 ->icon('present')
-                ->route('platform.jokes')
+                ->route('platform.jokes'),
+
+            Menu::make(__('JokesRandom'))
+                ->icon('present')
+                ->route('platform.jokes.random')
         ];
     }
 

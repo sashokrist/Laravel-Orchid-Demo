@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens;
 
 use App\Orchid\Layouts\JokeListLayout;
+use App\Orchid\Layouts\RandomJokeLayout;
 use App\Services\JokeService;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;

@@ -10,10 +10,12 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\JokeListScreen;
+use App\Orchid\Screens\JokeRandomScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\ProductEditScreen;
 use App\Orchid\Screens\ProductListScreen;
 use App\Orchid\Screens\ProductShowScreen;
+use App\Orchid\Screens\RandomJokeScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -155,6 +157,14 @@ Route::screen('jokes', JokeListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Jokes'), route('platform.jokes'));
+    });
+
+Route::screen('jokes/random', RandomJokeScreen::class)
+    ->name('platform.jokes.random')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Jokes'), route('platform.jokes.random'));
     });
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

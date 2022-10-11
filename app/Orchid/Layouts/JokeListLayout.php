@@ -16,7 +16,7 @@ class JokeListLayout extends Table
     /**
      * @var string
      */
-    public $target = 'data1';
+    public $target = 'data3';
 
     /**
      * @return TD[]
@@ -24,6 +24,13 @@ class JokeListLayout extends Table
     public function columns(): array
     {
         return [
+            TD::make('id', __('Id'))
+                ->sort()
+                ->cantHide()
+                ->filter(Input::make())
+                ->render(function ($joke) {
+                    return e($joke['id']);
+                }),
             TD::make('type', __('Type'))
                 ->sort()
                 ->cantHide()

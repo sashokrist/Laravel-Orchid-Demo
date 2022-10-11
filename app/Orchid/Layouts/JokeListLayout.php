@@ -16,7 +16,7 @@ class JokeListLayout extends Table
     /**
      * @var string
      */
-    public $target = 'data';
+    public $target = 'data1';
 
     /**
      * @return TD[]
@@ -27,18 +27,25 @@ class JokeListLayout extends Table
             TD::make('type', __('Type'))
                 ->sort()
                 ->cantHide()
-                ->filter(Input::make()),
-
+                ->filter(Input::make())
+                ->render(function ($joke) {
+                    return e($joke['type']);
+                }),
             TD::make('setup', __('Setup'))
                 ->sort()
                 ->cantHide()
                 ->filter(Input::make())
-                ->sort(),
-
+                ->render(function ($joke) {
+                    return e($joke['setup']);
+                }),
             TD::make('punchline', __('Punchline'))
                 ->sort()
                 ->cantHide()
-                ->filter(Input::make()),
+                ->filter(Input::make())
+                ->render(function ($joke) {
+                    return e($joke['punchline']);
+                }),
+
 
         ];
     }

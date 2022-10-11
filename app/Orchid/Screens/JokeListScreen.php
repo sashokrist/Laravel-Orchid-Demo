@@ -2,21 +2,23 @@
 
 namespace App\Orchid\Screens;
 
-use App\Models\Joke;
 use App\Orchid\Layouts\JokeListLayout;
 use App\Services\JokeService;
-use Illuminate\Http\Response;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
 class JokeListScreen extends Screen
 {
 
-    public function query(){
-        return [
+    public function query(JokeService $jokeService)
+    {
+        $jokes = $jokeService->getRandomTen();
 
-         ];
+        return [
+            'data1' => $jokes->repository(),
+            'data2' => $jokes->data(),
+            'data3' => $jokes->paginate(),
+        ];
     }
 
     /**
@@ -36,7 +38,8 @@ class JokeListScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'All jokes. Total: (' . Joke::all()->count() . ')';
+        return '';
+        //return 'All jokes. Total: (' . Joke::all()->count() . ')';
     }
 
     /**
@@ -57,7 +60,7 @@ class JokeListScreen extends Screen
     public function layout(): iterable
     {
         return [
-         JokeListLayout::class
+            JokeListLayout::class
         ];
     }
 }

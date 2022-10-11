@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Joke;
+use App\Repositories\JokeRepository;
+use App\Services\JokeService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(JokeService::class, function ($app) {
+            return new JokeService();
+        });
     }
 
     /**

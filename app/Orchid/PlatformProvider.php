@@ -41,8 +41,12 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('Products'))
                 ->icon('present')
-                ->route('platform.products')
+                ->route('platform.products'),
               //  ->permission('platform.systems.roles'),
+
+            Menu::make(__('Jokes'))
+                ->icon('present')
+                ->route('platform.jokes')
         ];
     }
 

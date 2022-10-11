@@ -9,6 +9,7 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\JokeListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\ProductEditScreen;
 use App\Orchid\Screens\ProductListScreen;
@@ -146,6 +147,14 @@ Route::screen('products', ProductListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Products'), route('platform.products'));
+    });
+
+Route::screen('jokes', JokeListScreen::class)
+    ->name('platform.jokes')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Jokes'), route('platform.jokes'));
     });
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

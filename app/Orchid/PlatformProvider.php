@@ -41,16 +41,23 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make(__('Products'))
                 ->icon('present')
-                ->route('platform.products'),
+                ->route('platform.products')
+                ->title(__('Product')),
               //  ->permission('platform.systems.roles'),
 
             Menu::make(__('Jokes'))
-                ->icon('present')
-                ->route('platform.jokes'),
+                ->icon('quote')
+                ->route('platform.jokes')
+                ->title(__('Jokes')),
 
             Menu::make(__('JokesRandom'))
-                ->icon('present')
-                ->route('platform.jokes.random')
+                ->icon('quote')
+                ->route('platform.jokes.random'),
+
+            Menu::make(__('UsersApi'))
+                ->icon('user')
+                ->route('platform.usersApi')
+                ->title(__('UserApi')),
         ];
     }
 
@@ -80,6 +87,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.products.create', __('create'))
                 ->addPermission('platform.product.update', __('Update'))
                 ->addPermission('platform.product.delete', __('Delete')),
+            ItemPermission::group(__('Jokes'))
+                ->addPermission('platform.jokes.list', __('List')),
+            ItemPermission::group(__('UserApi'))
+                ->addPermission('platform.userApi.list', __('List')),
         ];
     }
 }

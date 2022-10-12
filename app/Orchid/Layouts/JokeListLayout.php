@@ -36,7 +36,8 @@ class JokeListLayout extends Table
                 ->cantHide()
                 ->filter(Input::make())
                 ->render(function ($joke) {
-                    return e($joke['type']);
+                    return  Link::make(e($joke['type']))
+                        ->route('platform.jokes.show', $joke['id'])->icon('eye');
                 }),
             TD::make('setup', __('Setup'))
                 ->sort()

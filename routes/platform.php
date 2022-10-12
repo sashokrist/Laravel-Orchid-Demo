@@ -9,6 +9,7 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\JokeDetailsScreen;
 use App\Orchid\Screens\JokeListScreen;
 use App\Orchid\Screens\JokeRandomScreen;
 use App\Orchid\Screens\PlatformScreen;
@@ -21,6 +22,7 @@ use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
+use App\Orchid\Screens\UserApiListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -165,6 +167,22 @@ Route::screen('jokes/random', RandomJokeScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Jokes'), route('platform.jokes.random'));
+    });
+
+Route::screen('jokes/{jokes}/show', JokeDetailsScreen::class)
+    ->name('platform.jokes.show')
+    ->breadcrumbs(function (Trail $trail, $joke) {
+        return $trail
+            ->parent('platform.jokes')
+            ->push(__('Jokes'), route('platform.jokes.show', $joke));
+    });
+
+Route::screen('usersApi', UserApiListScreen::class)
+    ->name('platform.usersApi')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('UsersApi'), route('platform.usersApi'));
     });
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

@@ -50,7 +50,7 @@ class RandomJokeScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make('Back')->route('platform.products')->icon('arrow-left-circle')
+            Link::make('Back')->route('platform.jokes')->icon('arrow-left-circle')
         ];
     }
 
@@ -70,6 +70,8 @@ class RandomJokeScreen extends Screen
                     }),
                 Sight::make('type')
                     ->render(function ($joke) {
+                        Link::make($joke['type'])
+                            ->route('platform.jokes.show', $joke['id'])->icon('eye');
                         return e($joke['type']);
                     }),
                 Sight::make('setup')

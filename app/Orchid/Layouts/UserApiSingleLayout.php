@@ -7,7 +7,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class UserApiListLayout extends Table
+class UserApiSingleLayout extends Table
 {
     /**
      * Data source.
@@ -17,7 +17,7 @@ class UserApiListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'data2';
+    protected $target = '';
 
     /**
      * Get the table cells to be displayed.

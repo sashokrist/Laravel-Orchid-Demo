@@ -23,6 +23,7 @@ use App\Orchid\Screens\User\UserEditScreen;
 use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use App\Orchid\Screens\UserApiListScreen;
+use App\Orchid\Screens\UserApiSingleScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -183,6 +184,14 @@ Route::screen('usersApi', UserApiListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('UsersApi'), route('platform.usersApi'));
+    });
+
+Route::screen('usersApi/show/{id}', UserApiSingleScreen::class)
+    ->name('platform.usersApi.show')
+    ->breadcrumbs(function (Trail $trail, $id) {
+        return $trail
+            ->parent('platform.usersApi')
+            ->push(__('Jokes'), route('platform.usersApi.show', $id));
     });
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

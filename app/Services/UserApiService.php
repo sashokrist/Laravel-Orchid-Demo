@@ -26,10 +26,9 @@ class UserApiService
         return $this;
     }
 
-    public function getRandom()
+    public function getById($id)
     {
-        $this->response = Http::acceptJson()->get('https://official-joke-api.appspot.com/random_joke');
-       // dd($this);
+        $this->response = Http::acceptJson()->get('https://reqres.in/api/users/' . $id);
         return $this;
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\URL;
 use Orchid\Screen\Repository;
 
 class UserApiService
@@ -20,9 +21,7 @@ class UserApiService
 
     public function getAll()
    {
-      // $randomTen = 'random_ten';
-      // $random = 'random_joke';
-        $this->response = Http::acceptJson()->get('https://reqres.in/api/users');
+        $this->response = Http::acceptJson()->get('https://reqres.in/api/users?page=1');
         return $this;
     }
 
@@ -41,7 +40,6 @@ class UserApiService
         if (!$this->response->successful()) {
             return [];
         }
-
         $response = $this->response->json();
         return $key && isset($response[$key]) ? $response[$key] : $response;
     }
@@ -60,33 +58,45 @@ class UserApiService
      *
      * @param string $key       Data key to fetch items from API response, default `data`.
      * @param int $perPage      Number of items per page, default 15.
-     * @param int $page         Current page
+     * @param int $currentUrlPath  Current page
      * @param array $options    Paginator options
      * @return LengthAwarePaginator
      */
-    public function paginate($key = 'data', $perPage = 12, $page = null, $options = [])
+    public function paginate($key = 'data', $perPage = null, $page = null, $options = [])
     {
-        /*
-         *  "page": 2,
-            "per_page": 6,
-            "total": 12,
-            "total_pages": 2,
-         */
         $items = $this->data();
-        $meta = ['total' => 12];
+        $response = $this->response->json();
+        $meta = ['total' => $response['total']];
+       $perPage = $response['per_page'];
 
         if (!$items) {
             return [];
         }
-
         $items = $items instanceof Collection ? $items : Collection::make($items);
-        $page = $page ?: (Paginator::resolveCurrentPage());
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $currentUrlPath = Request::path();
         $options = array_merge($options, [
-            'path' => $currentUrlPath,
+            'path' => substr($currentUrlPath, 15),
         ]);
-
         return new LengthAwarePaginator($items, $meta['total'], $perPage, $page, $options);
+    }
+
+    public function putUser( \Illuminate\Http\Request $request, $id)
+    {
+        $response = Http::post('https://reqres.in/api/users' . $id, [
+            'name' => $request->post['name'],
+            'job' => $request->post['job'],
+        ]);
+        return $this;
+    }
+
+    public function postUser( \Illuminate\Http\Request $request)
+    {
+        $response = Http::post('https://reqres.in/api/register', [
+            'email' => $request->post['email'],
+            'password' => $request->post['password'],
+        ]);
+        return $response->json();
     }
 
 }

@@ -20,7 +20,6 @@ class UserApiSingleScreen extends Screen
         $users = $userApiService->getById($id);
         return [
             'data' => $users->data(),
-            'data2' => $users->paginate(),
         ];
     }
 

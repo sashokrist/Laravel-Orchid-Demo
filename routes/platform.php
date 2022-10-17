@@ -13,9 +13,11 @@ use App\Orchid\Screens\JokeDetailsScreen;
 use App\Orchid\Screens\JokeListScreen;
 use App\Orchid\Screens\JokeRandomScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\PostUserApiScreen;
 use App\Orchid\Screens\ProductEditScreen;
 use App\Orchid\Screens\ProductListScreen;
 use App\Orchid\Screens\ProductShowScreen;
+use App\Orchid\Screens\PutUserApiScreen;
 use App\Orchid\Screens\RandomJokeScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -191,7 +193,23 @@ Route::screen('usersApi/show/{id}', UserApiSingleScreen::class)
     ->breadcrumbs(function (Trail $trail, $id) {
         return $trail
             ->parent('platform.usersApi')
-            ->push(__('Jokes'), route('platform.usersApi.show', $id));
+            ->push(__('userApi'), route('platform.usersApi.show', $id));
+    });
+
+Route::screen('usersApi/edit/{id}', PutUserApiScreen::class)
+    ->name('platform.usersApi.edit')
+    ->breadcrumbs(function (Trail $trail, $id) {
+        return $trail
+            ->parent('platform.usersApi')
+            ->push(__('userApi'), route('platform.usersApi.edit', $id));
+    });
+
+Route::screen('usersApi/posts', PostUserApiScreen::class)
+    ->name('platform.usersApi.posts')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.usersApi')
+            ->push(__('Create'), route('platform.usersApi.posts'));
     });
 
 //Route::screen('idea', Idea::class, 'platform.screens.idea');

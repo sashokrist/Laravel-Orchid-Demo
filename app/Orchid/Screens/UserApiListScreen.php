@@ -4,6 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Orchid\Layouts\UserApiListLayout;
 use App\Services\UserApiService;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
@@ -19,10 +20,10 @@ class UserApiListScreen extends Screen
     public function query(UserApiService $userApiService): iterable
     {
         $users = $userApiService->getAll();
-      //  dd($users);
+        //dd($users);
         return [
             'data' => $users->data(),
-            'data2' => $users->paginate(),
+            'data2' => $users->paginate()
         ];
     }
 
@@ -43,7 +44,12 @@ class UserApiListScreen extends Screen
      */
     public function commandBar(): iterable
     {
-        return [];
+        return [
+            Link::make('Test post')
+                ->icon('note')
+                ->route('platform.usersApi.posts'),
+               // ->canSee(!$this->post->exists),
+        ];
     }
 
     /**
@@ -54,7 +60,7 @@ class UserApiListScreen extends Screen
     public function layout(): iterable
     {
         return [
-            UserApiListLayout::class
+            UserApiListLayout::class,
         ];
     }
 }

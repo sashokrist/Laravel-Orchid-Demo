@@ -34,7 +34,7 @@ class PutUserApiScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Put UserApi Screen';
+        return 'Test Put Screen';
     }
 
     /**
@@ -42,7 +42,7 @@ class PutUserApiScreen extends Screen
      */
     public function description(): ?string
     {
-        return "userApi";
+        return "Test Put method";
     }
 
     /**
@@ -68,11 +68,11 @@ class PutUserApiScreen extends Screen
     {
         return [
             Layout::rows([
-                Input::make('post.name')
+                Input::make('name')
                     ->title('Name')
                     ->placeholder('name'),
 
-                Input::make('post.job')
+                Input::make('job')
                     ->title('Job')
                     ->placeholder('job'),
 
@@ -88,11 +88,9 @@ class PutUserApiScreen extends Screen
      */
     public function createOrUpdate(UserApiService $userApiService, Request $request, $id)
     {
-       // dd($request->all());
-      //  $post->fill($request->get('post'))->save();
-        $userApiService->putUser($request, $id);
+        $userApiService->put($request, $id);
 
-        Alert::info('You have successfully updated a user.');
+        Alert::info('You have successfully tested put request.');
 
         return redirect()->route('platform.usersApi');
     }

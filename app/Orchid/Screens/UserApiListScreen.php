@@ -20,10 +20,8 @@ class UserApiListScreen extends Screen
     public function query(UserApiService $userApiService): iterable
     {
         $users = $userApiService->getAll();
-        //dd($users);
         return [
-            'data' => $users->data(),
-            'data2' => $users->paginate()
+            'data' => $users->paginate()
         ];
     }
 
@@ -38,6 +36,14 @@ class UserApiListScreen extends Screen
     }
 
     /**
+     * The description is displayed on the user's screen under the heading
+     */
+    public function description(): ?string
+    {
+        return "Get all users";
+    }
+
+    /**
      * Button commands.
      *
      * @return \Orchid\Screen\Action[]
@@ -48,7 +54,6 @@ class UserApiListScreen extends Screen
             Link::make('Test post')
                 ->icon('note')
                 ->route('platform.usersApi.posts'),
-               // ->canSee(!$this->post->exists),
         ];
     }
 

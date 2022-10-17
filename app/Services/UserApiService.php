@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Http\Client\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request;
@@ -21,8 +22,9 @@ class UserApiService
 
     public function getAll()
    {
-        $this->response = Http::acceptJson()->get('https://reqres.in/api/users?page=1');
-        return $this;
+       $page = Arr::get(request()->all(), 'page') ?? 1;
+       $this->response = Http::acceptJson()->get('https://reqres.in/api/users?page=' . $page);
+       return $this;
     }
 
     public function getById($id)
@@ -67,36 +69,38 @@ class UserApiService
         $items = $this->data();
         $response = $this->response->json();
         $meta = ['total' => $response['total']];
-       $perPage = $response['per_page'];
 
         if (!$items) {
             return [];
         }
         $items = $items instanceof Collection ? $items : Collection::make($items);
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+       // $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $currentUrlPath = Request::path();
         $options = array_merge($options, [
             'path' => substr($currentUrlPath, 15),
         ]);
-        return new LengthAwarePaginator($items, $meta['total'], $perPage, $page, $options);
+        return new LengthAwarePaginator($items, $meta['total'], $perPage = $response['per_page'], $page = $response['page'], $options);
     }
 
-    public function putUser( \Illuminate\Http\Request $request, $id)
+    public function put( \Illuminate\Http\Request $request, $id)
     {
-        $response = Http::post('https://reqres.in/api/users' . $id, [
-            'name' => $request->post['name'],
-            'job' => $request->post['job'],
+        $response = Http::put('https://reqres.in/api/users' . $id, [
+            'name' => $request->name,
+            'job' => $request->job,
         ]);
+
         return $this;
     }
 
-    public function postUser( \Illuminate\Http\Request $request)
+    public function post( \Illuminate\Http\Request $request)
     {
-        $response = Http::post('https://reqres.in/api/register', [
-            'email' => $request->post['email'],
-            'password' => $request->post['password'],
+        $response = Http::post('https://reqres.in/api/login', [
+            'username' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
         ]);
-        return $response->json();
+
+        return $this;
     }
 
 }

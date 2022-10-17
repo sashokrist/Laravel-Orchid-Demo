@@ -20,7 +20,7 @@ class UserApiListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'data2';
+    protected $target = 'data';
 
     /**
      * Get the table cells to be displayed.

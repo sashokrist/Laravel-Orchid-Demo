@@ -21,7 +21,6 @@ class PostUserApiScreen extends Screen
     public function query(UserApiService $userApiService): iterable
     {
         $users = $userApiService->getAll();
-        //dd($users);
         return [
             'data' => $users->data(),
         ];
@@ -34,7 +33,15 @@ class PostUserApiScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'PostUserApiScreen';
+        return 'Test Post Screen';
+    }
+
+    /**
+     * The description is displayed on the user's screen under the heading
+     */
+    public function description(): ?string
+    {
+        return "Test Post method";
     }
 
     /**
@@ -60,16 +67,16 @@ class PostUserApiScreen extends Screen
     {
         return [
             Layout::rows([
-                Input::make('post.name')
+                Input::make('name')
                     ->title('Title')
                     ->placeholder('name'),
 
-                Input::make('post.email')
+                Input::make('email')
                     ->type('email')
                     ->title('Email')
                     ->placeholder('email'),
 
-                Input::make('post.password')
+                Input::make('password')
                     ->type('password')
                     ->title('Password')
                     ->placeholder('password'),
@@ -86,11 +93,9 @@ class PostUserApiScreen extends Screen
      */
     public function createOrUpdate(UserApiService $userApiService, Request $request)
     {
-       // dd($request->all());
-        //  $post->fill($request->get('post'))->save();
-        $userApiService->postUser($request);
+        $userApiService->post($request);
 
-        Alert::info('You have successfully created a user.');
+        Alert::info('You have successfully post a user.');
 
         return redirect()->route('platform.usersApi');
     }

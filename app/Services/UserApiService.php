@@ -20,16 +20,18 @@ class UserApiService
      */
     public $response;
 
+    public $baseUrl = 'https://reqres.in/api/users';
+
     public function getAll()
    {
        $page = Arr::get(request()->all(), 'page') ?? 1;
-       $this->response = Http::acceptJson()->get('https://reqres.in/api/users?page=' . $page);
+       $this->response = Http::acceptJson()->get($this->baseUrl . '?page='.  $page);
        return $this;
     }
 
     public function getById($id)
     {
-        $this->response = Http::acceptJson()->get('https://reqres.in/api/users/' . $id);
+        $this->response = Http::acceptJson()->get($this->baseUrl . $id);
         return $this;
     }
 
@@ -84,7 +86,7 @@ class UserApiService
 
     public function put( \Illuminate\Http\Request $request, $id)
     {
-        $response = Http::put('https://reqres.in/api/users' . $id, [
+        $response = Http::put($this->baseUrl . $id, [
             'name' => $request->name,
             'job' => $request->job,
         ]);
@@ -94,7 +96,7 @@ class UserApiService
 
     public function post( \Illuminate\Http\Request $request)
     {
-        $response = Http::post('https://reqres.in/api/login', [
+        $response = Http::post($this->baseUrl . '/login', [
             'username' => $request->name,
             'email' => $request->email,
             'password' => $request->password,

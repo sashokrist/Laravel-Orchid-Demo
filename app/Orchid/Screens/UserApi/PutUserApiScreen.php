@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\UserApi;
 
 use App\Services\UserApiService;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +11,7 @@ use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
 
-class PostUserApiScreen extends Screen
+class PutUserApiScreen extends Screen
 {
     /**
      * Query data.
@@ -21,6 +21,7 @@ class PostUserApiScreen extends Screen
     public function query(UserApiService $userApiService): iterable
     {
         $users = $userApiService->getAll();
+       // dd($users);
         return [
             'data' => $users->data(),
         ];
@@ -33,7 +34,7 @@ class PostUserApiScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Test Post Screen';
+        return 'Test Put Screen';
     }
 
     /**
@@ -41,7 +42,7 @@ class PostUserApiScreen extends Screen
      */
     public function description(): ?string
     {
-        return "Test Post method";
+        return "Test Put method";
     }
 
     /**
@@ -52,8 +53,8 @@ class PostUserApiScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make('Test Post')
-                ->icon('pencil')
+            Button::make('Update')
+                ->icon('note')
                 ->method('createOrUpdate'),
         ];
     }
@@ -68,18 +69,12 @@ class PostUserApiScreen extends Screen
         return [
             Layout::rows([
                 Input::make('name')
-                    ->title('Title')
+                    ->title('Name')
                     ->placeholder('name'),
 
-                Input::make('email')
-                    ->type('email')
-                    ->title('Email')
-                    ->placeholder('email'),
-
-                Input::make('password')
-                    ->type('password')
-                    ->title('Password')
-                    ->placeholder('password'),
+                Input::make('job')
+                    ->title('Job')
+                    ->placeholder('job'),
 
             ])
         ];
@@ -91,11 +86,11 @@ class PostUserApiScreen extends Screen
      *
      * @return RedirectResponse
      */
-    public function createOrUpdate(UserApiService $userApiService, Request $request)
+    public function createOrUpdate(UserApiService $userApiService, Request $request, $id)
     {
-        $userApiService->post($request);
+        $userApiService->put($request, $id);
 
-        Alert::info('You have successfully post a user.');
+        Alert::info('You have successfully tested put request.');
 
         return redirect()->route('platform.usersApi');
     }

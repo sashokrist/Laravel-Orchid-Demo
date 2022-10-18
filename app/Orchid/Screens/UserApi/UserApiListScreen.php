@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\UserApi;
 
-use App\Orchid\Layouts\UserApiListLayout;
+use App\Orchid\Layouts\UserApi\UserApiFiltersLayout;
+use App\Orchid\Layouts\UserApi\UserApiListLayout;
 use App\Services\UserApiService;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Screen\Sight;
-use Orchid\Support\Facades\Layout;
 
 class UserApiListScreen extends Screen
 {
@@ -19,10 +17,15 @@ class UserApiListScreen extends Screen
      */
     public function query(UserApiService $userApiService): iterable
     {
-        $users = $userApiService->getAll();
+       // $currentUrlPath = substr(Request::fullUrl(), 47);
+        $users = $userApiService->get($this->perPage()); //filters with all params
         return [
             'data' => $users->paginate()
         ];
+    }
+
+    private function perPage(){
+        return (new UserApiService)->filters(UserApiFiltersLayout::class);
     }
 
     /**
@@ -65,6 +68,7 @@ class UserApiListScreen extends Screen
     public function layout(): iterable
     {
         return [
+            UserApiFiltersLayout::class,
             UserApiListLayout::class,
         ];
     }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Orchid\Layouts;
+namespace App\Orchid\Layouts\UserApi;
 
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class UserApiSingleLayout extends Table
+class UserApiListLayout extends Table
 {
     /**
      * Data source.
@@ -17,7 +17,7 @@ class UserApiSingleLayout extends Table
      *
      * @var string
      */
-    protected $target = '';
+    protected $target = 'data';
 
     /**
      * Get the table cells to be displayed.
@@ -55,6 +55,11 @@ class UserApiSingleLayout extends Table
                 ->filter(Input::make())
                 ->render(function ($user) {
                     return e($user['last_name']);
+                }),
+            TD::make(__('Actions'))
+                ->render(function ($user) {
+                    return  Link::make('Edit')
+                        ->route('platform.usersApi.edit', $user['id'])->icon('pencil');
                 }),
 
 

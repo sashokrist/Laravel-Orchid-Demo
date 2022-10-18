@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\UserApi;
 
 use App\Services\UserApiService;
-use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
 use Orchid\Support\Facades\Layout;
@@ -19,7 +18,7 @@ class UserApiSingleScreen extends Screen
     {
         $users = $userApiService->getById($id);
         return [
-            'data' => $users->data(),
+            'data' => $users->paginate(),
         ];
     }
 

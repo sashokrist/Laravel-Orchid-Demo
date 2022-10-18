@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Orchid\Filters\UserFilter;
 use Illuminate\Http\Client\Response;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -22,10 +23,15 @@ class UserApiService
 
     public $baseUrl = 'https://reqres.in/api/users';
 
-    public function getAll()
+    public function get($per_page)
    {
+     // dd($per_page);
        $page = Arr::get(request()->all(), 'page') ?? 1;
-       $this->response = Http::acceptJson()->get($this->baseUrl . '?page='.  $page);
+      $per_page = Arr::get(request()->all(), $per_page) ?? 6;
+       $this->response = Http::acceptJson()->get('https://reqres.in/api/users' ,  [
+               'page' => $page,
+               'per_page' => $per_page//$this->filters(4),
+           ]);
        return $this;
     }
 
@@ -103,6 +109,11 @@ class UserApiService
         ]);
 
         return $this;
+    }
+
+    public function filters()
+    {
+        return UserFilter::class;
     }
 
 }

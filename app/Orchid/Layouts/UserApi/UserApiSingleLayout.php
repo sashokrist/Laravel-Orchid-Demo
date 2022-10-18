@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Orchid\Layouts;
+namespace App\Orchid\Layouts\UserApi;
 
-use App\Models\Product;
-use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class UserApiListLayout extends Table
+class UserApiSingleLayout extends Table
 {
     /**
      * Data source.
@@ -20,7 +17,7 @@ class UserApiListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'data';
+    protected $target = '';
 
     /**
      * Get the table cells to be displayed.
@@ -58,11 +55,6 @@ class UserApiListLayout extends Table
                 ->filter(Input::make())
                 ->render(function ($user) {
                     return e($user['last_name']);
-                }),
-            TD::make(__('Actions'))
-                ->render(function ($user) {
-                    return  Link::make('Edit')
-                        ->route('platform.usersApi.edit', $user['id'])->icon('pencil');
                 }),
 
 

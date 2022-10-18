@@ -7,6 +7,7 @@ use App\Orchid\Layouts\UserApi\UserApiListLayout;
 use App\Services\UserApiService;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use function Termwind\render;
 
 class UserApiListScreen extends Screen
 {
@@ -17,15 +18,14 @@ class UserApiListScreen extends Screen
      */
     public function query(UserApiService $userApiService): iterable
     {
-       // $currentUrlPath = substr(Request::fullUrl(), 47);
-        $users = $userApiService->get($this->perPage()); //filters with all params
+        $users = $userApiService->get($this->getParameters()); //filters with all params
         return [
             'data' => $users->paginate()
         ];
     }
 
-    private function perPage(){
-        return (new UserApiService)->filters(UserApiFiltersLayout::class);
+    private function getParameters(){
+        return  request()->all();
     }
 
     /**

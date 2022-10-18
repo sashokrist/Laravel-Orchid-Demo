@@ -59,9 +59,22 @@ class UserFilter extends Filter
                 ->empty('Select per page')
                 ->options([
                     '1' => 1,
+                    '2' => 2,
                     '3'=> 3,
+                    '4'=> 4,
+                    '5'=> 5,
                     '6' => 6])
                 ->title(__('Per page')),
+            Select::make('page')
+                ->empty('Select page')
+                ->options([
+                    '1' => 1,
+                    '2' => 2,
+                    '3'=> 3,
+                    '4'=> 4,
+                    '5'=> 5,
+                    '6' => 6])
+                ->title(__('Page')),
         ];
     }
 }

@@ -21,23 +21,18 @@ class UserApiService
      */
     public $response;
 
-    public $baseUrl = 'https://reqres.in/api/users';
-
     public function get($per_page)
    {
-     // dd($per_page);
-       $page = Arr::get(request()->all(), 'page') ?? 1;
-      $per_page = Arr::get(request()->all(), $per_page) ?? 6;
        $this->response = Http::acceptJson()->get('https://reqres.in/api/users' ,  [
-               'page' => $page,
-               'per_page' => $per_page//$this->filters(4),
+               'page' => request()->page,
+               'per_page' => request()->per_page,
            ]);
        return $this;
     }
 
     public function getById($id)
     {
-        $this->response = Http::acceptJson()->get($this->baseUrl . $id);
+        $this->response = Http::acceptJson()->get('https://reqres.in/api/users' . $id);
         return $this;
     }
 
@@ -92,7 +87,7 @@ class UserApiService
 
     public function put( \Illuminate\Http\Request $request, $id)
     {
-        $response = Http::put($this->baseUrl . $id, [
+        $response = Http::put('https://reqres.in/api/users' . $id, [
             'name' => $request->name,
             'job' => $request->job,
         ]);
@@ -102,7 +97,7 @@ class UserApiService
 
     public function post( \Illuminate\Http\Request $request)
     {
-        $response = Http::post($this->baseUrl . '/login', [
+        $response = Http::post('https://reqres.in/api/users' . '/login', [
             'username' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
@@ -110,10 +105,4 @@ class UserApiService
 
         return $this;
     }
-
-    public function filters()
-    {
-        return UserFilter::class;
-    }
-
 }

@@ -8,7 +8,7 @@
 </p>
 <h1>ORCHID DEMO</h1>
 
-<h2>Implementation of RST Api using Orchid</h2>
+<h2>Implementation of REST Api using Orchid</h2>
 
 Roles, custom filter, custom pagination
 

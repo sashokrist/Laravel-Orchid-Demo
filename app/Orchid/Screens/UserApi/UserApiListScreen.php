@@ -18,14 +18,10 @@ class UserApiListScreen extends Screen
      */
     public function query(UserApiService $userApiService): iterable
     {
-        $users = $userApiService->get($this->getParameters()); //filters with all params
+        $users = $userApiService->get();
         return [
             'data' => $users->paginate()
         ];
-    }
-
-    private function getParameters(){
-        return  request()->all();
     }
 
     /**

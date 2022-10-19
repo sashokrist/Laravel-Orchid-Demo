@@ -10,7 +10,7 @@
 
 <h2>Implementation of REST Api using Orchid</h2>
 
-Roles, custom filter, custom pagination
+Using dependency injection, Service, custom filter, custom pagination, Roles.
 
 <img width="1437" alt="Screenshot 2022-10-19 at 15 49 49" src="https://user-images.githubusercontent.com/11788009/196696655-bfe27d75-8338-45f8-8b50-348b3d484cd6.png">
 <img width="1100" alt="Screenshot 2022-10-19 at 15 50 29" src="https://user-images.githubusercontent.com/11788009/196696658-66815984-79c6-40ce-8ddc-d6857bf54b7a.png">

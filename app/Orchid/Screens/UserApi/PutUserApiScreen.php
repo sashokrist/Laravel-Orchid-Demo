@@ -20,11 +20,15 @@ class PutUserApiScreen extends Screen
      */
     public function query(UserApiService $userApiService): iterable
     {
-        $users = $userApiService->getAll();
+        $users = $userApiService->get($this->getParameters());
        // dd($users);
         return [
             'data' => $users->data(),
         ];
+    }
+
+    private function getParameters(){
+        return  request()->all();
     }
 
     /**

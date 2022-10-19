@@ -10,7 +10,7 @@
 
 <h2>Implementation of REST Api using Orchid</h2>
 
-Using dependency injection, Service, custom filter, custom pagination, Roles.
+Using dependency injection, Service, custom filter, custom pagination, Roles, CRUD implementation.
 
 Documentation - https://orchid.software/en/docs/
 

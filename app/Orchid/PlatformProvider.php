@@ -42,22 +42,25 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make(__('Products'))
                 ->icon('present')
                 ->route('platform.products')
-                ->title(__('Product')),
-              //  ->permission('platform.systems.roles'),
+                ->title(__('Product'))
+                ->permission('platform.products.list'),
 
             Menu::make(__('Jokes'))
                 ->icon('quote')
                 ->route('platform.jokes')
-                ->title(__('Jokes')),
+                ->title(__('Jokes'))
+                ->permission('platform.jokes.list'),
 
             Menu::make(__('JokesRandom'))
                 ->icon('quote')
-                ->route('platform.jokes.random'),
+                ->route('platform.jokes.random')
+                ->permission('platform.jokes.list'),
 
             Menu::make(__('UsersApi'))
                 ->icon('user')
                 ->route('platform.usersApi')
-                ->title(__('UserApi')),
+                ->title(__('UserApi'))
+                ->permission(['platform.userApi.list', 'platform.userApi.details']),
         ];
     }
 

@@ -90,7 +90,8 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('Jokes'))
                 ->addPermission('platform.jokes.list', __('List')),
             ItemPermission::group(__('UserApi'))
-                ->addPermission('platform.userApi.list', __('List')),
+                ->addPermission('platform.userApi.list', __('List'))
+                ->addPermission('platform.userApi.details', __('details')),
         ];
     }
 }

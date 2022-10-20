@@ -17,7 +17,7 @@ class UserApiSingleLayout extends Table
      *
      * @var string
      */
-    protected $target = '';
+    protected $target = 'data';
 
     /**
      * Get the table cells to be displayed.
@@ -27,35 +27,32 @@ class UserApiSingleLayout extends Table
     protected function columns(): iterable
     {
         return [
-            TD::make('id', __('Id'))
+            TD::make('id', __('id'))
                 ->sort()
                 ->cantHide()
-                ->filter(Input::make())
-                ->render(function ($user) {
-                    return e($user['id']);
-                }),
-            TD::make('email', __('Email'))
-                ->sort()
-                ->cantHide()
-                ->filter(Input::make())
-                ->render(function ($user) {
-                    return  Link::make(e($user['email']))
-                        ->route('platform.usersApi.show', $user['id'])->icon('eye');
-                }),
-            TD::make('first_name', __('First_name'))
-                ->sort()
-                ->cantHide()
-                ->filter(Input::make())
-                ->render(function ($user) {
-                    return e($user['first_name']);
-                }),
-            TD::make('last_name', __('Last_name'))
-                ->sort()
-                ->cantHide()
-                ->filter(Input::make())
-                ->render(function ($user) {
-                    return e($user['last_name']);
-                }),
+                ->filter(Input::make()),
+//            TD::make('email', __('Email'))
+//                ->sort()
+//                ->cantHide()
+//                ->filter(Input::make())
+//                ->render(function ($user) {
+//                    return  Link::make(e($user['email']))
+//                        ->route('platform.usersApi.show', $user['id'])->icon('eye');
+//                }),
+//            TD::make('first_name', __('First_name'))
+//                ->sort()
+//                ->cantHide()
+//                ->filter(Input::make())
+//                ->render(function ($user) {
+//                    return e($user['first_name']);
+//                }),
+//            TD::make('last_name', __('Last_name'))
+//                ->sort()
+//                ->cantHide()
+//                ->filter(Input::make())
+//                ->render(function ($user) {
+//                    return e($user['last_name']);
+//                }),
 
 
         ];

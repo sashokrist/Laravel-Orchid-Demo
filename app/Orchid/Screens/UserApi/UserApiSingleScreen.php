@@ -18,7 +18,7 @@ class UserApiSingleScreen extends Screen
     {
         $users = $userApiService->getById($id);
         return [
-            'data' => $users->paginate(),
+            'data' => $users->data(),
         ];
     }
 
@@ -30,6 +30,16 @@ class UserApiSingleScreen extends Screen
     public function name(): ?string
     {
         return 'UserApiSingleScreen';
+    }
+
+    /**
+     * @return iterable|null
+     */
+    public function permission(): ?iterable
+    {
+        return [
+            'platform.userApi.details',
+        ];
     }
 
     /**
@@ -53,6 +63,7 @@ class UserApiSingleScreen extends Screen
             Layout::legend('data', [
                 Sight::make('id')
                     ->render(function ($user) {
+                       /// dd($user[0]['id']);
                         return e($user['id']);
                     }),
                 Sight::make('email')

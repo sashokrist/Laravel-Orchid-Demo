@@ -43,6 +43,16 @@ class UserApiListScreen extends Screen
     }
 
     /**
+     * @return iterable|null
+     */
+    public function permission(): ?iterable
+    {
+        return [
+            'platform.userApi.list',
+        ];
+    }
+
+    /**
      * Button commands.
      *
      * @return \Orchid\Screen\Action[]

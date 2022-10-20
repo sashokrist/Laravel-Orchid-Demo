@@ -32,7 +32,7 @@ class UserApiService
 
     public function getById($id)
     {
-        $this->response = Http::acceptJson()->get('https://reqres.in/api/users' . $id);
+        $this->response = Http::acceptJson()->get('https://reqres.in/api/users/' . $id);
         return $this;
     }
 
@@ -87,22 +87,22 @@ class UserApiService
 
     public function put( \Illuminate\Http\Request $request, $id)
     {
-        $response = Http::put('https://reqres.in/api/users' . $id, [
+        $response = Http::put('https://reqres.in/api/users/' . $id, [
             'name' => $request->name,
             'job' => $request->job,
         ]);
-
+        dd($response->json());
         return $this;
     }
 
     public function post( \Illuminate\Http\Request $request)
     {
-        $response = Http::post('https://reqres.in/api/users' . '/login', [
+        $response = Http::post('https://reqres.in/api/users/' . '/login', [
             'username' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
         ]);
-
+dd($response->json());
         return $this;
     }
 }

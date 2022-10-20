@@ -24,7 +24,7 @@ class UserApiService
     public function get()
    {
        $this->response = Http::acceptJson()->get('https://reqres.in/api/users' ,  [
-               'page' =>request()->page,
+               'page' => request()->page,
                'per_page' => request()->per_page,
            ]);
        return $this;

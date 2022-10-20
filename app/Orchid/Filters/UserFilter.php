@@ -53,10 +53,8 @@ class UserFilter extends Filter
      */
     public function display(): iterable
     {
-        //per_page here
         return [
             Select::make('per_page')
-                ->empty('Select per page')
                 ->options([
                     '1' => 1,
                     '2' => 2,
@@ -64,17 +62,8 @@ class UserFilter extends Filter
                     '4'=> 4,
                     '5'=> 5,
                     '6' => 6])
+                ->empty('Per page: ' . $this->request->get('per_page'))
                 ->title(__('Per page')),
-            Select::make('page')
-                ->empty('Select page')
-                ->options([
-                    '1' => 1,
-                    '2' => 2,
-                    '3'=> 3,
-                    '4'=> 4,
-                    '5'=> 5,
-                    '6' => 6])
-                ->title(__('Page')),
         ];
     }
 }

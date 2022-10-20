@@ -56,6 +56,13 @@ class UserApiListLayout extends Table
                 ->render(function ($user) {
                     return e($user['last_name']);
                 }),
+            TD::make('avatar', __('avatar'))
+                ->sort()
+                ->cantHide()
+                ->filter(Input::make())
+                ->render(function ($user) {
+                    return '<img src="https://www.gravatar.com/avatar/1608f765af2ca1155df3ab98346366a9?d=mp" class="bg-light">';
+                }),
             TD::make(__('Actions'))
                 ->render(function ($user) {
                     return  Link::make('Edit')
@@ -66,3 +73,4 @@ class UserApiListLayout extends Table
         ];
     }
 }
+//<img src="https://www.gravatar.com/avatar/1608f765af2ca1155df3ab98346366a9?d=mp" class="bg-light">

@@ -63,7 +63,6 @@ class UserApiSingleScreen extends Screen
             Layout::legend('data', [
                 Sight::make('id')
                     ->render(function ($user) {
-                       /// dd($user[0]['id']);
                         return e($user['id']);
                     }),
                 Sight::make('email')
@@ -77,6 +76,10 @@ class UserApiSingleScreen extends Screen
                 Sight::make('last_name')
                     ->render(function ($user) {
                         return e($user['last_name']);
+                    }),
+                Sight::make('avatar')
+                    ->render(function ($user) {
+                        return '<img src="https://www.gravatar.com/avatar/1608f765af2ca1155df3ab98346366a9?d=mp" class="bg-light">';
                     }),
             ]),
         ];

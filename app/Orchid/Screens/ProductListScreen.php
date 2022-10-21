@@ -9,6 +9,7 @@ use App\Orchid\Layouts\ProductListLayout;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Components\Notification;
+use Orchid\Platform\Models\Role;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
@@ -135,7 +136,15 @@ class ProductListScreen extends Screen
         ]);
 
         $product->fill($request->input('product'))->save();
-
+        /**
+         * Работи така, но само админа вижда нотификациите, опитвам да асайна customer role ($userWithCustomerRole), но не работи
+         * много го мъчих не можах да го измисля :(
+         * $roles[2] = customer
+         ********************************
+         * $roles = Role::query()->get();
+         * $userWithCustomerRole = $request->user()->addRoles($roles[2]);
+         * dd($userWithCustomerRole);
+         */
         $request->user()->notify(new TaskCompleted());
 
         Toast::info(__('Product was saved.'));

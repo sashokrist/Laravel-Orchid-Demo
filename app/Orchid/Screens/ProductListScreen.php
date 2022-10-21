@@ -3,10 +3,12 @@
 namespace App\Orchid\Screens;
 
 use App\Models\Product;
+use App\Notifications\TaskCompleted;
 use App\Orchid\Layouts\ProductEditLayout;
 use App\Orchid\Layouts\ProductListLayout;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Orchid\Platform\Components\Notification;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
@@ -126,7 +128,6 @@ class ProductListScreen extends Screen
      */
     public function saveProduct(Request $request, Product $product): void
     {
-        //dd($request->all());
         $request->validate([
             'product.title' => [ 'required'],
             'product.description' => [ 'required'],
@@ -134,6 +135,8 @@ class ProductListScreen extends Screen
         ]);
 
         $product->fill($request->input('product'))->save();
+
+        $request->user()->notify(new TaskCompleted());
 
         Toast::info(__('Product was saved.'));
     }

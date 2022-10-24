@@ -136,16 +136,24 @@ class ProductListScreen extends Screen
         ]);
 
         $product->fill($request->input('product'))->save();
-        /**
-         * Работи така, но само админа вижда нотификациите, опитвам да асайна customer role ($userWithCustomerRole), но не работи
-         * много го мъчих не можах да го измисля :(
-         * $roles[2] = customer
-         ********************************
-         * $roles = Role::query()->get();
-         * $userWithCustomerRole = $request->user()->addRoles($roles[2]);
-         * dd($userWithCustomerRole);
-         */
-        $request->user()->notify(new TaskCompleted());
+
+        $roles = Role::query()->get();
+       // dd($roles[2]);
+        $users = User::query()->get();
+        foreach ($users as $user) {
+            if ($user->inRole($roles[2])){
+               // dd('customer');
+             $user->notify(new TaskCompleted());
+             Toast::info(__('Users with role customer was notified.'));
+            }
+         // dd('not customer');
+//            foreach ($user->roles as $role) {
+//                if ($role->name === 'customer'){
+//                    $user->notify(new TaskCompleted());
+//                }
+//            }
+        }
+       // $request->user()->notify(new TaskCompleted());
 
         Toast::info(__('Product was saved.'));
     }

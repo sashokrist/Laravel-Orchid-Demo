@@ -211,4 +211,4 @@ Route::screen('usersApi/posts', PostUserApiScreen::class)
             ->push(__('Create'), route('platform.usersApi.posts'));
     });
 
-//Route::screen('idea', Idea::class, 'platform.screens.idea');
+Route::get('notification/{notifiable}', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notification');

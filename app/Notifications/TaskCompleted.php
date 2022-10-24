@@ -67,6 +67,6 @@ class TaskCompleted extends Notification
         return (new DashboardMessage)
             ->title('Hello')
             ->message('New product created!')
-            ->action(url('/'));
+            ->action('notification' , url('notification/' . $notifiable));
     }
 }

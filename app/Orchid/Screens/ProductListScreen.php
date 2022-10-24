@@ -6,11 +6,12 @@ use App\Models\Product;
 use App\Notifications\TaskCompleted;
 use App\Orchid\Layouts\ProductEditLayout;
 use App\Orchid\Layouts\ProductListLayout;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Orchid\Platform\Components\Notification;
 use Orchid\Platform\Models\Role;
-use Orchid\Platform\Models\User;
+use \App\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
@@ -137,24 +138,15 @@ class ProductListScreen extends Screen
 
         $product->fill($request->input('product'))->save();
 
-        $roles = Role::query()->get();
-       // dd($roles[2]);
-        $users = User::query()->get();
+        $users = User::query()->with('roles')->get();
         foreach ($users as $user) {
-            if ($user->inRole($roles[2])){
-               // dd('customer');
-             $user->notify(new TaskCompleted());
-             Toast::info(__('Users with role customer was notified.'));
+            foreach ($user->roles as $role) {
+                if ($role->name === 'customer'){
+                    $user->notify(new TaskCompleted());
+                    Toast::info(__('Users with role customer was notified.'));
+                }
             }
-         // dd('not customer');
-//            foreach ($user->roles as $role) {
-//                if ($role->name === 'customer'){
-//                    $user->notify(new TaskCompleted());
-//                }
-//            }
         }
-       // $request->user()->notify(new TaskCompleted());
-
         Toast::info(__('Product was saved.'));
     }
 

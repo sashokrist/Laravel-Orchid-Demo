@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\NotificationController;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsScreen;
@@ -211,4 +212,4 @@ Route::screen('usersApi/posts', PostUserApiScreen::class)
             ->push(__('Create'), route('platform.usersApi.posts'));
     });
 
-Route::get('notification/', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notification');
+Route::get('notification/{notifiable}', [NotificationController::class, 'index'])->name('notification');

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Traits\ProductTrait;
+use App\Traits\UserTrait;
 use Illuminate\Notifications\Notifiable;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 
 {
-    use Notifiable, ProductTrait;
+    use Notifiable, UserTrait;
     /**
      * The attributes that are mass assignable.
      *

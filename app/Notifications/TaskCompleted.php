@@ -66,7 +66,7 @@ class TaskCompleted extends Notification
     {
         return (new DashboardMessage)
             ->title('Hello')
-            ->message('New product created!')
-            ->action('Notification Action', url('/'));
+            ->message('New product was created!')
+            ->action('Notification Action', url('http://orchid-ocr.test/admin/notifications'));
     }
 }

@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Notifications\TaskCompleted;
 use App\Orchid\Layouts\ProductEditLayout;
 use App\Orchid\Layouts\ProductListLayout;
-use App\Traits\ProductTrait;
+use App\Traits\UserTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -23,7 +23,6 @@ use Orchid\Support\Facades\Toast;
 
 class ProductListScreen extends Screen
 {
-    use ProductTrait;
     /**
      * Query data.
      *
@@ -140,9 +139,9 @@ class ProductListScreen extends Screen
 
         $product->fill($request->input('product'))->save();
 
-        $users = User::query()->get();
+        $users = \App\Models\User::customers()->get(); //customerOnly
         foreach ($users as $user) {
-            $user->byRoleCustomer()->notify(new TaskCompleted());
+            $user->notify(new TaskCompleted());
         }
         Toast::info(__('Product was saved.'));
     }

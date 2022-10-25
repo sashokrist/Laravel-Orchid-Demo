@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Notifications\TaskCompleted;
 use App\Orchid\Layouts\ProductEditLayout;
 use App\Orchid\Layouts\ProductListLayout;
+use App\Traits\ProductTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -22,6 +23,7 @@ use Orchid\Support\Facades\Toast;
 
 class ProductListScreen extends Screen
 {
+    use ProductTrait;
     /**
      * Query data.
      *
@@ -138,14 +140,9 @@ class ProductListScreen extends Screen
 
         $product->fill($request->input('product'))->save();
 
-        $users = User::query()->with('roles')->get();
+        $users = User::query()->get();
         foreach ($users as $user) {
-            foreach ($user->roles as $role) {
-                if ($role->name === 'customer'){
-                    $user->notify(new TaskCompleted());
-                    Toast::info(__('Users with role customer was notified.'));
-                }
-            }
+            $user->byRoleCustomer()->notify(new TaskCompleted());
         }
         Toast::info(__('Product was saved.'));
     }

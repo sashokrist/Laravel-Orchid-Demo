@@ -10,7 +10,6 @@ use App\Traits\UserTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Orchid\Platform\Components\Notification;
 use Orchid\Platform\Models\Role;
 use \App\Models\User;
 use Orchid\Screen\Actions\Link;
@@ -141,7 +140,14 @@ class ProductListScreen extends Screen
 
         $users = \App\Models\User::customers()->get(); //customerOnly
         foreach ($users as $user) {
-            $user->notify(new TaskCompleted());
+            $msgData = [
+                'body' => 'New product was created.',
+                'thanks' => 'Thank you',
+                'msgText' => 'Check out the product',
+                'msgUrl' => route('platform.products.show', $product),
+                'msg_id' => $product->id,
+            ];
+           $user->notify( new TaskCompleted($msgData));
         }
         Toast::info(__('Product was saved.'));
     }

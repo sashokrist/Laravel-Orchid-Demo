@@ -15,13 +15,16 @@ class TaskCompleted extends Notification
 {
     use Queueable;
 
+    private $msgData;
+
     /**
      * Create a new notification instance.
      *
+     * @return void
      */
-    public function __construct()
+    public function __construct($msgData)
     {
-
+        $this->msgData = $msgData;
     }
 
     /**
@@ -32,21 +35,21 @@ class TaskCompleted extends Notification
      */
     public function via($notifiable)
     {
-        return [DashboardChannel::class];
+        return [ 'mail', DashboardChannel::class];
     }
 
     /**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line($this->msgData['body'])
+            ->action($this->msgData['msgText'], $this->msgData['msgUrl'])
+            ->line($this->msgData['thanks']);
     }
 
     /**
@@ -58,7 +61,7 @@ class TaskCompleted extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'msg_id' => $this->msgData['msg_id']
         ];
     }
 
@@ -66,7 +69,7 @@ class TaskCompleted extends Notification
     {
         return (new DashboardMessage)
             ->title('Hello')
-            ->message('New product was created!')
-            ->action('Notification Action', url('http://orchid-ocr.test/admin/notifications'));
+            ->message($this->msgData['body'])
+            ->action($this->msgData['msgUrl']);
     }
 }

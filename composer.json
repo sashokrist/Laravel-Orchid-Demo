@@ -11,7 +11,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "orchid/crud": "^3.8",
-        "orchid/platform": "^13.4"
+        "orchid/platform": "^13.4",
+        "teamtnt/laravel-scout-tntsearch-driver": "^12.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.20",

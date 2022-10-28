@@ -4,9 +4,10 @@ namespace App\Orchid\Presenters;
 
 use Illuminate\Support\Str;
 use Laravel\Scout\Builder;
+use Orchid\Screen\Contracts\Searchable;
 use Orchid\Support\Presenter;
 
-class ProductPresenter extends Presenter
+class ProductPresenter extends Presenter implements Searchable
 {
     /**
      * @return string
@@ -29,9 +30,7 @@ class ProductPresenter extends Presenter
      */
     public function image(): ?string
     {
-        $hash = md5(strtolower(trim($this->entity->email)));
-
-        return "https://www.gravatar.com/avatar/$hash?d=mp";
+        return $this->entity->image;
     }
 
     /**
@@ -52,5 +51,16 @@ class ProductPresenter extends Presenter
     public function searchQuery(string $query = null): Builder
     {
         return $this->entity->search($query);
+        //return $this->entity->search($query)->where('title', true);
+    }
+
+    public function subTitle(): string
+    {
+        return $this->entity->description;
+    }
+
+    public function url(): string
+    {
+        return route('platform.products.show', $this->entity->id);
     }
 }

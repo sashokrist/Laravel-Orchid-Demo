@@ -51,7 +51,10 @@ class ProductListLayout extends Table
             TD::make('image', 'Image')->width('150px')->cantHide(),
             TD::make('category', 'category')->width('150px')->cantHide()
             ->render(function (Product $product){
-               // dd($product->categories());
+                foreach ($product->categories as $category) {
+                    return $category->title;
+                }
+               // return $category_name;
             }),
 
             TD::make(__('Actions'))

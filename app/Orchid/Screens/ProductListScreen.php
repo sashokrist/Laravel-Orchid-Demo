@@ -31,15 +31,6 @@ class ProductListScreen extends Screen
      */
     public function query(): iterable
     {
-        $products = Product::with('categories')->get();
-        //dd($products);
-        foreach ($products as $product) {
-            foreach ($product as $item) {
-                dd($item);
-            }
-            dd($product);
-        }
-
         return [
             'products' => Product::with('categories')
                 ->filters()
@@ -118,13 +109,6 @@ class ProductListScreen extends Screen
     {
         return [
             ProductListLayout::class,
-            Layout::columns([
-                Layout::rows([
-                    Relation::make('product.categories')
-                        ->fromModel(Category::class, 'title')
-                        ->title('Category'),
-                ]),
-            ]),
             Layout::modal('addProduct', ProductEditLayout::class)->async('asyncGetProduct'),
 //            Layout::modal('asyncEditProductModal', ProductEditLayout::class)
 //                ->async('asyncGetProduct'),
@@ -149,13 +133,14 @@ class ProductListScreen extends Screen
      */
     public function saveProduct(Request $request, Product $product): void
     {
+      // dd($request->product['categories']);
         $request->validate([
             'product.title' => [ 'required'],
             'product.description' => [ 'required'],
             'product.price' => [ 'required'],
         ]);
-
         $product->fill($request->input('product'))->save();
+        $product->categories()->sync([$request->product['categories']]);
 
         $users = \App\Models\User::customers()->get(); //customerOnly
         foreach ($users as $user) {

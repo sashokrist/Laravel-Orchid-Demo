@@ -30,7 +30,7 @@ class ProductPresenter extends Presenter implements Searchable
      */
     public function image(): ?string
     {
-        return $this->entity->image;
+        return md5(strtolower(trim($this->entity->image)));
     }
 
     /**
@@ -51,7 +51,7 @@ class ProductPresenter extends Presenter implements Searchable
     public function searchQuery(string $query = null): Builder
     {
         return $this->entity->search($query);
-        //return $this->entity->search($query)->where('title', true);
+       // return $this->entity->search($query)->where('title', $query);
     }
 
     public function subTitle(): string
@@ -62,5 +62,6 @@ class ProductPresenter extends Presenter implements Searchable
     public function url(): string
     {
         return route('platform.products.show', $this->entity->id);
+        // return route('platform.systems.users.edit', $this->entity);
     }
 }

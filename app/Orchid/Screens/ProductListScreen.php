@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Notifications\TaskCompleted;
 use App\Orchid\Layouts\ProductEditLayout;
@@ -15,6 +16,7 @@ use \App\Models\User;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
 use Orchid\Support\Facades\Layout;
@@ -29,8 +31,18 @@ class ProductListScreen extends Screen
      */
     public function query(): iterable
     {
+        $products = Product::with('categories')->get();
+        //dd($products);
+        foreach ($products as $product) {
+            foreach ($product as $item) {
+                dd($item);
+            }
+            dd($product);
+        }
+
         return [
-            'products' => Product::filters()
+            'products' => Product::with('categories')
+                ->filters()
                 ->defaultSort('id', 'desc')
                 ->paginate(5),
         ];
@@ -106,6 +118,13 @@ class ProductListScreen extends Screen
     {
         return [
             ProductListLayout::class,
+            Layout::columns([
+                Layout::rows([
+                    Relation::make('product.categories')
+                        ->fromModel(Category::class, 'title')
+                        ->title('Category'),
+                ]),
+            ]),
             Layout::modal('addProduct', ProductEditLayout::class)->async('asyncGetProduct'),
 //            Layout::modal('asyncEditProductModal', ProductEditLayout::class)
 //                ->async('asyncGetProduct'),

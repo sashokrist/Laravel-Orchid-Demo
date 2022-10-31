@@ -77,4 +77,9 @@ class Product extends Model
 
         return $array;
     }
+
+    public function categories()
+    {
+        return$this->belongsToMany(Category::class)->withPivot('product_id', 'category_id');
+    }
 }

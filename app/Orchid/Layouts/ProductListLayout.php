@@ -2,8 +2,10 @@
 
 namespace App\Orchid\Layouts;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Orchid\Screens\ProductListScreen;
+use Orchid\Platform\Models\Role;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -11,6 +13,7 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Layouts\Legend;
 use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Layouts\Table;
@@ -46,6 +49,10 @@ class ProductListLayout extends Table
             TD::make('description', 'Description')->width('150px')->cantHide(),
             TD::make('price', 'Price')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
             TD::make('image', 'Image')->width('150px')->cantHide(),
+            TD::make('category', 'category')->width('150px')->cantHide()
+            ->render(function (Product $product){
+               // dd($product->categories());
+            }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
@@ -58,7 +65,6 @@ class ProductListLayout extends Table
                             Link::make(__('Edit'))
                                 ->route('platform.products.edit', $product->id)
                                 ->icon('pencil'),
-
                             Button::make(__('Delete'))
                                 ->icon('trash')
                                 ->confirm(__('Once is deleted, all of its resources and data will be permanently deleted.'))

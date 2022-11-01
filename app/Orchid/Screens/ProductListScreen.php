@@ -136,13 +136,13 @@ class ProductListScreen extends Screen
     public function saveProduct(Request $request, Product $product): void
     {
    // dd($request->product['categories']);
-       // dd($request->all());
+     //dd($request->all());
         $request->validate([
             'product.title' => [ 'required'],
             'product.description' => [ 'required'],
             'product.price' => [ 'required'],
         ]);
-        $product->fill($request->input('product'))->save();
+        $product->fill($request->input('product'))->tags()->associate($request->product['tags'])->save();
         $product->categories()->sync($request->product['categories']);
 
 

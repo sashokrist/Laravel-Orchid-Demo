@@ -4,6 +4,7 @@ namespace App\Orchid\Layouts;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use App\Orchid\Screens\ProductListScreen;
 use Orchid\Platform\Models\Role;
 use Orchid\Platform\Models\User;
@@ -51,12 +52,13 @@ class ProductListLayout extends Table
             TD::make('image', 'Image')->width('150px')->cantHide(),
             TD::make('category', 'category')->width('150px')->cantHide()
             ->render(function (Product $product){
-                foreach ($product->categories as $category) {
-                    return $category->title;
-                }
-               // return $category_name;
+                return join(', ' , $product->categories->pluck('title')->all());
             }),
-
+            TD::make('tag', 'tag')->width('150px')->cantHide()
+                ->render(function (Product $product){
+                   // dd($product);
+                    return $product->tags->name;
+                }),
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')

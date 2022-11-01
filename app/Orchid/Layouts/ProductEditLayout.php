@@ -4,6 +4,7 @@ namespace App\Orchid\Layouts;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\DateTimer;
 use Orchid\Screen\Fields\Group;
@@ -35,9 +36,16 @@ class ProductEditLayout extends Rows
             Input::make('product.id')->type('hidden'),
             Input::make('product.title')->required()->title('Title'),
             Input::make('product.description')->required()->title('Description'),
-            Relation::make('product.categories')
+
+            Relation::make('product.categories.')
                 ->fromModel(Category::class, 'title')
+                ->multiple()
                 ->title('Category'),
+
+            Relation::make('product.tags')
+                ->fromModel(Tag::class, 'name')
+                ->title('Tag'),
+
             Input::make('product.price')
                 ->title('Price')
                 ->mask([

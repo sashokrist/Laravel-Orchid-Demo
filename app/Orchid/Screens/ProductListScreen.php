@@ -31,8 +31,10 @@ class ProductListScreen extends Screen
      */
     public function query(): iterable
     {
+        $test = Product::with('tags')->get();
         return [
             'products' => Product::with('categories')
+                ->with('tags')
                 ->filters()
                 ->defaultSort('id', 'desc')
                 ->paginate(5),
@@ -133,14 +135,16 @@ class ProductListScreen extends Screen
      */
     public function saveProduct(Request $request, Product $product): void
     {
-      // dd($request->product['categories']);
+   // dd($request->product['categories']);
+       // dd($request->all());
         $request->validate([
             'product.title' => [ 'required'],
             'product.description' => [ 'required'],
             'product.price' => [ 'required'],
         ]);
         $product->fill($request->input('product'))->save();
-        $product->categories()->sync([$request->product['categories']]);
+        $product->categories()->sync($request->product['categories']);
+
 
         $users = \App\Models\User::customers()->get(); //customerOnly
         foreach ($users as $user) {

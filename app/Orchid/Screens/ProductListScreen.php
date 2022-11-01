@@ -4,6 +4,7 @@ namespace App\Orchid\Screens;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Tag;
 use App\Notifications\TaskCompleted;
 use App\Orchid\Layouts\ProductEditLayout;
 use App\Orchid\Layouts\ProductListLayout;
@@ -31,7 +32,6 @@ class ProductListScreen extends Screen
      */
     public function query(): iterable
     {
-        $test = Product::with('tags')->get();
         return [
             'products' => Product::with('categories')
                 ->with('tags')
@@ -135,8 +135,6 @@ class ProductListScreen extends Screen
      */
     public function saveProduct(Request $request, Product $product): void
     {
-   // dd($request->product['categories']);
-     //dd($request->all());
         $request->validate([
             'product.title' => [ 'required'],
             'product.description' => [ 'required'],
@@ -144,7 +142,6 @@ class ProductListScreen extends Screen
         ]);
         $product->fill($request->input('product'))->tags()->associate($request->product['tags'])->save();
         $product->categories()->sync($request->product['categories']);
-
 
         $users = \App\Models\User::customers()->get(); //customerOnly
         foreach ($users as $user) {

@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
-use App\Orchid\Layouts\ProductEditLayout;
-use App\Orchid\Layouts\Role\RoleEditLayout;
+use App\Orchid\Layouts\Product\ProductEditLayout;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Orchid\Platform\Models\Role;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 
 class ProductEditScreen extends Screen

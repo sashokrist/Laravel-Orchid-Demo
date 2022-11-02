@@ -1,26 +1,13 @@
 <?php
 
-namespace App\Orchid\Layouts;
+namespace App\Orchid\Layouts\Product;
 
-use App\Models\Category;
 use App\Models\Product;
-use App\Models\Tag;
-use App\Orchid\Screens\ProductListScreen;
-use Orchid\Platform\Models\Role;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Actions\ModalToggle;
-use Orchid\Screen\Fields\CheckBox;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Layouts\Legend;
-use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\Layouts\Table;
-use Orchid\Screen\Sight;
 use Orchid\Screen\TD;
-use Orchid\Support\Facades\Layout;
 
 class ProductListLayout extends Table
 {
@@ -47,14 +34,14 @@ class ProductListLayout extends Table
                     return Link::make($product->title)
                         ->route('platform.products.show', $product->id)->icon('eye');
                 }),
-            TD::make('description', 'Description')->width('150px')->cantHide(),
-            TD::make('price', 'Price')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
-            TD::make('image', 'Image')->width('150px')->cantHide(),
-            TD::make('category', 'category')->width('150px')->cantHide()
+            TD::make('description', 'Description')->width('100px')->cantHide(),
+            TD::make('price', 'Price')->width('100px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
+            TD::make('image', 'Image')->width('100px')->cantHide(),
+            TD::make('category', 'category')->width('100px')->cantHide()->filter(ProductFilterLayout::class)->sort()
             ->render(function (Product $product){
                 return join(', ' , $product->categories->pluck('title')->all());
             }),
-            TD::make('tag', 'tag')->width('150px')->cantHide()
+            TD::make('tag', 'tag')->width('100px')->cantHide()->filter(TD::FILTER_TEXT)->sort()
                 ->render(function (Product $product){
                    // dd($product);
                     return $product->tags->name;

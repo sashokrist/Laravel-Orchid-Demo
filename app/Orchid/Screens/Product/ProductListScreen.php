@@ -1,23 +1,15 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Product;
 
-use App\Models\Category;
 use App\Models\Product;
-use App\Models\Tag;
 use App\Notifications\TaskCompleted;
-use App\Orchid\Layouts\ProductEditLayout;
-use App\Orchid\Layouts\ProductListLayout;
-use App\Traits\UserTrait;
+use App\Orchid\Layouts\Product\ProductEditLayout;
+use App\Orchid\Layouts\Product\ProductFilterLayout;
+use App\Orchid\Layouts\Product\ProductListLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Orchid\Platform\Models\Role;
-use \App\Models\User;
-use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
 use Orchid\Support\Facades\Layout;
@@ -35,7 +27,7 @@ class ProductListScreen extends Screen
         return [
             'products' => Product::with('categories')
                 ->with('tags')
-                ->filters()
+                ->filters(ProductFilterLayout::class)
                 ->defaultSort('id', 'desc')
                 ->paginate(5),
         ];
@@ -110,6 +102,7 @@ class ProductListScreen extends Screen
     public function layout(): iterable
     {
         return [
+            ProductFilterLayout::class,
             ProductListLayout::class,
             Layout::modal('addProduct', ProductEditLayout::class)->async('asyncGetProduct'),
 //            Layout::modal('asyncEditProductModal', ProductEditLayout::class)

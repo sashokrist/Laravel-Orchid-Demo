@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Joke;
 
 use App\Orchid\Layouts\RandomJokeLayout;
 use App\Services\JokeService;

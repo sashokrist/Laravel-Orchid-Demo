@@ -1,19 +1,14 @@
 <?php
 
-namespace App\Orchid\Layouts;
+namespace App\Orchid\Layouts\Product;
 
 use App\Models\Category;
-use App\Models\Product;
 use App\Models\Tag;
 use Orchid\Screen\Field;
-use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
-use Orchid\Support\Facades\Layout;
 
 class ProductEditLayout extends Rows
 {

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Orchid\Screens;
+namespace App\Orchid\Screens\Joke;
 
-use App\Orchid\Layouts\JokeListLayout;
+use App\Orchid\Layouts\Joke\JokeListLayout;
 use App\Orchid\Layouts\RandomJokeLayout;
 use App\Services\JokeService;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Layout;
 
 class JokeListScreen extends Screen
 {

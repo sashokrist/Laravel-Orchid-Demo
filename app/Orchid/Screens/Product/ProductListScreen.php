@@ -9,6 +9,7 @@ use App\Orchid\Layouts\Product\ProductFilterLayout;
 use App\Orchid\Layouts\Product\ProductListLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Orchid\Filters\HttpFilter;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
@@ -27,7 +28,7 @@ class ProductListScreen extends Screen
         return [
             'products' => Product::with('categories')
                 ->with('tags')
-                ->filters(ProductFilterLayout::class)
+                ->filters(ProductFilterLayout::class, new HttpFilter)
                 ->defaultSort('id', 'desc')
                 ->paginate(5),
         ];
@@ -88,9 +89,6 @@ class ProductListScreen extends Screen
     {
         return [
             ModalToggle::make('Create Product')->modal('addProduct')->method('saveProduct'),
-//            Link::make(__('Add'))
-//                ->icon('plus')
-//                ->route('platform.products.create'),
         ];
     }
 
@@ -105,8 +103,6 @@ class ProductListScreen extends Screen
             ProductFilterLayout::class,
             ProductListLayout::class,
             Layout::modal('addProduct', ProductEditLayout::class)->async('asyncGetProduct'),
-//            Layout::modal('asyncEditProductModal', ProductEditLayout::class)
-//                ->async('asyncGetProduct'),
         ];
     }
 

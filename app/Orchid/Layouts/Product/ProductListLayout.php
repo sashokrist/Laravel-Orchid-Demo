@@ -43,8 +43,8 @@ class ProductListLayout extends Table
             }),
             TD::make('tag', 'tag')->width('100px')->cantHide()->filter(TD::FILTER_TEXT)->sort()
                 ->render(function (Product $product){
-                   // dd($product);
-                    return $product->tags->name;
+                    return Link::make($product->tags->name)
+                        ->route('platform.products.filter', $product->tags->name)->icon('filter');
                 }),
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)

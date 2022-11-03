@@ -37,6 +37,7 @@ class Product extends Model
         'id',
         'title',
         'price',
+        'product.tag',
     ];
 
     /**
@@ -48,6 +49,7 @@ class Product extends Model
         'id',
         'title',
         'price',
+        'product.tag',
         'updated_at',
         'created_at',
     ];

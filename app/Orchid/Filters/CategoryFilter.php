@@ -8,7 +8,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 
-class ProductFilter extends Filter
+class CategoryFilter extends Filter
 {
     /**
      * The displayable name of the filter.

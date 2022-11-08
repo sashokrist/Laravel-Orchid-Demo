@@ -32,7 +32,7 @@ class ProductListLayout extends Table
             TD::make('title', 'Title')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort()
                 ->render(function (Product $product){
                     return Link::make($product->title)
-                        ->route('platform.products.show', $product->id)->icon('eye');
+                        ->route('platform.products.show', $product)->icon('eye');
                 }),
             TD::make('description', 'Description')->width('100px')->cantHide(),
             TD::make('price', 'Price')->width('100px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
@@ -43,8 +43,7 @@ class ProductListLayout extends Table
             }),
             TD::make('tag', 'tag')->width('100px')->cantHide()->filter(TD::FILTER_TEXT)->sort()
                 ->render(function (Product $product){
-                    return Link::make($product->tags->name)
-                        ->route('platform.products.filter', $product->tags->name)->icon('filter');
+                    return $product->tags->name;
                 }),
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)

@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Filters;
 
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Builder;
 use Orchid\Filters\Filter;
 use Orchid\Screen\Field;
@@ -38,9 +39,11 @@ class TagFilter extends Filter
      */
     public function run(Builder $builder): Builder
     {
-        return $builder->whereHas('tags', function (Builder $query) {
-            $query->where('name', $this->request->get('tag'));
+        $tagName = Tag::find($this->request->get('tag'));
+        return $builder->whereHas('tags', function (Builder $query) use ($tagName) {
+            $query->where('name', $tagName->name);
         });
+        // return $builder->withTags();
     }
 
     /**
@@ -52,10 +55,7 @@ class TagFilter extends Filter
     {
         return [
             Select::make('tag')
-                ->options([
-                    'cars' => 'cars',
-                    'pets' =>  'pets',
-                    'others' => 'others',])
+                ->fromModel(Tag::class, 'name')
                 ->empty('Select Tag: ' . $this->request->get('tag'))
                 ->title(__('Tag')),
         ];

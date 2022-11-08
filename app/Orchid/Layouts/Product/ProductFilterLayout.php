@@ -4,6 +4,7 @@ namespace App\Orchid\Layouts\Product;
 
 use App\Orchid\Filters\CategoryFilter;
 use App\Orchid\Filters\TagFilter;
+use App\Orchid\Filters\TagHttpFilter;
 use Orchid\Filters\Filter;
 use Orchid\Screen\Layouts\Selection;
 
@@ -16,7 +17,7 @@ class ProductFilterLayout extends Selection
     {
         return [
             CategoryFilter::class,
-            TagFilter::class
+            TagFilter::class,
         ];
     }
 }

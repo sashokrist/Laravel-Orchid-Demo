@@ -156,7 +156,7 @@ Route::screen('products', ProductListScreen::class)
             ->push(__('Products'), route('platform.products'));
     });
 
-Route::screen('products?tag={tag}', ProductListScreen::class)->name('platform.products.filter');
+//Route::screen('products?tag={tag}', ProductListScreen::class)->name('platform.products.filter');
 
 Route::screen('jokes', JokeListScreen::class)
     ->name('platform.jokes')

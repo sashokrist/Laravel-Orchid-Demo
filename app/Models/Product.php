@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Orchid\Presenters\ProductPresenter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
@@ -37,7 +40,7 @@ class Product extends Model
         'id',
         'title',
         'price',
-        'product.tag',
+        'tags.name',
     ];
 
     /**
@@ -49,7 +52,7 @@ class Product extends Model
         'id',
         'title',
         'price',
-        'product.tag',
+        'tags.name',
         'updated_at',
         'created_at',
     ];
@@ -89,4 +92,14 @@ class Product extends Model
     {
         return $this->belongsTo(Tag::class, 'tag_id');
     }
+
+    /**
+     * @param Builder $query
+     */
+    public function scopeOrderByTagName(Builder $query, $direction)
+    {
+        $query->leftJoin('tags','tags.id','=','products.tag_id')
+            ->orderBy('tags.name', 'asc');
+    }
+
 }

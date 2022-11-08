@@ -4,12 +4,13 @@ namespace App\Orchid\Screens\Product;
 
 use App\Models\Product;
 use App\Notifications\TaskCompleted;
+use App\Orchid\Filters\TagFilter;
+use App\Orchid\Filters\HttpFilter;
 use App\Orchid\Layouts\Product\ProductEditLayout;
 use App\Orchid\Layouts\Product\ProductFilterLayout;
 use App\Orchid\Layouts\Product\ProductListLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Orchid\Filters\HttpFilter;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
@@ -23,12 +24,12 @@ class ProductListScreen extends Screen
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(HttpFilter $httpFilter): iterable
     {
         return [
             'products' => Product::with('categories')
                 ->with('tags')
-                ->filters(ProductFilterLayout::class, new HttpFilter)
+                ->filters(ProductFilterLayout::class, $httpFilter)
                 ->defaultSort('id', 'desc')
                 ->paginate(5),
         ];

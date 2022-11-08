@@ -101,5 +101,4 @@ class Product extends Model
         $query->leftJoin('tags','tags.id','=','products.tag_id')
             ->orderBy('tags.name', 'asc');
     }
-
 }

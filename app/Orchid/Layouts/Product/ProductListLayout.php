@@ -52,7 +52,6 @@ class ProductListLayout extends Table
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
-
                             Link::make(__('Edit'))
                                 ->route('platform.products.edit', $product->id)
                                 ->icon('pencil'),

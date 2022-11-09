@@ -44,6 +44,9 @@ class HttpFilter extends OrchidHttpFilter
                 if ($this->request->sort === 'tag') {
                     $builder->orderByTagName($builder, $descending ? 'desc' : 'asc');
                 }
+                if ($this->request->sort === 'category') {
+                    $builder->orderByCategory($builder, $descending ? 'desc' : 'asc');
+                }
                 if ($allowedSorts->contains($property)) {
                     $key = $this->sanitize($key);
                     $builder->orderBy($key, $descending ? 'desc' : 'asc');

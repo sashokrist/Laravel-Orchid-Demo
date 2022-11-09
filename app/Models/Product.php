@@ -41,6 +41,7 @@ class Product extends Model
         'title',
         'price',
         'tags.name',
+        'categories.title'
     ];
 
     /**
@@ -53,6 +54,7 @@ class Product extends Model
         'title',
         'price',
         'tags.name',
+        'categories.title',
         'updated_at',
         'created_at',
     ];
@@ -99,6 +101,15 @@ class Product extends Model
     public function scopeOrderByTagName(Builder $query, $direction)
     {
         $query->leftJoin('tags','tags.id','=','products.tag_id')
-            ->orderBy('tags.name', 'asc');
+            ->orderBy('tags.id', 'asc');
+    }
+
+    /**
+     * @param Builder $query
+     */
+    public function scopeOrderByCategory(Builder $query, $direction)
+    {
+            $query->orderBy(Category::select('title')
+                ->whereColumn('categories.id', 'products.id'), 'asc')->get();
     }
 }

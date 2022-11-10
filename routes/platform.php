@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\NotificationController;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
+use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
@@ -121,7 +122,7 @@ Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.ex
 Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
 Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
-///Route::screen(ExampleFieldsAdvancedScreen::class, 'example-advanced')->name('platform.example.advanced');
+Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class, 'example-advanced')->name('platform.example.advanced');
 
 //Product
 Route::screen('products/{product}/edit', ProductEditScreen::class)

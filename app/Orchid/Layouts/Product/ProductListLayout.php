@@ -36,7 +36,10 @@ class ProductListLayout extends Table
                 }),
             TD::make('description', 'Description')->width('100px')->cantHide(),
             TD::make('price', 'Price')->width('100px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
-            TD::make('image', 'Image')->width('100px')->cantHide(),
+            TD::make('image', 'Image')->width('100px')->cantHide()
+                ->render(function (Product $product) {
+                    return view('products.image', ['image' => $product->image]);
+                }),
             TD::make('category', 'category')->width('100px')->cantHide()->filter(ProductFilterLayout::class)->sort()
             ->render(function (Product $product){
                 return join(', ' , $product->categories->pluck('title')->all());

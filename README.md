@@ -10,7 +10,9 @@
 
 <h4>RestApi integration (https://reqres.in/)
     
-Dependency injection 
+Dependency injection
+    
+Repositoy Pattern
     
 Service 
     

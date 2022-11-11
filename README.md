@@ -10,7 +10,7 @@
 
 <h2>Implementation of Orchid</h2>
 
-Api integration, dependency injection, Service, custom filter, custom sort, custom pagination, Roles, CRUD implementation.
+RestApi integration, dependency injection, Service, custom filter, custom sort, custom pagination, Roles, CRUD implementation.
 
 Documentation - https://orchid.software/en/docs/
 

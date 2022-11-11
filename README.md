@@ -16,7 +16,7 @@ Repositoy Pattern
     
 Service 
     
-Custom filter, custom sort, custom pagination 
+Relations - Custom filter, custom sort, custom pagination 
     
 Roles 
     

@@ -6,7 +6,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-<h1>Implementation of Laravel Orchid platform - Documentation: https://orchid.software/en/docs/</h1>
+<h1>Implementation of Laravel Orchid platform</h1>
 
-<h2>RestApi integration (https://reqres.in/), dependency injection, Service, custom filter, custom sort, custom pagination, Roles, CRUD implementation.</h2>
+<h2>RestApi integration (https://reqres.in/), dependency injection, Service, custom filter, custom sort, custom pagination, Roles, CRUD implementation.
+ 
+ Documentation: https://orchid.software/en/docs/</h2>
 

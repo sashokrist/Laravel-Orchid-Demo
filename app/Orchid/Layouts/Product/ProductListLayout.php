@@ -38,6 +38,7 @@ class ProductListLayout extends Table
             TD::make('price', 'Price')->width('100px')->cantHide()->filter(TD::FILTER_TEXT)->sort(),
             TD::make('image', 'Image')->width('100px')->cantHide()
                 ->render(function (Product $product) {
+                    $product->attachment()->get();
                     return view('products.image', ['image' => $product->image]);
                 }),
             TD::make('category', 'category')->width('100px')->cantHide()->filter(ProductFilterLayout::class)->sort()

@@ -14,6 +14,7 @@ use App\Orchid\Screens\Joke\JokeDetailsScreen;
 use App\Orchid\Screens\Joke\JokeListScreen;
 use App\Orchid\Screens\Joke\RandomJokeScreen;
 use App\Orchid\Screens\JokeRandomScreen;
+use App\Orchid\Screens\Order\OrderListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Product\ProductEditScreen;
 use App\Orchid\Screens\Product\ProductListScreen;
@@ -123,6 +124,20 @@ Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.exam
 Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class, 'example-advanced')->name('platform.example.advanced');
+
+//Order
+//Route::screen('orders', [OrderListScreen::class, 'index']);
+Route::screen('orders', OrderListScreen::class)
+    ->name('platform.orders')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Orders'), route('platform.orders'));
+    });
+//Route::screen('orders/{id}', [OrderController::class, 'show']);
+//Route::screen('orders', [OrderListScreen::class, 'store']);
+//Route::screen('orders/{id}', [OrderListScreen::class, 'update']);
+//Route::screen('orders/{id}', [OrderListScreen::class, 'delete']);
 
 //Product
 Route::screen('products/{product}/edit', ProductEditScreen::class)

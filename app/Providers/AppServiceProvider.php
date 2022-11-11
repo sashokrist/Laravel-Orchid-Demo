@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Interfaces\OrderRepositoryInterface;
 use App\Models\Joke;
 use App\Models\Product;
 use App\Repositories\JokeRepository;
+use App\Repositories\OrderRepository;
 use App\Services\JokeService;
 use App\Services\UserApiService;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(UserApiService::class, function ($app) {
             return new UserApiService();
         });
+
+        $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
     }
 
     /**

@@ -8,7 +8,7 @@
 </p>
 <h1>Implementation of Laravel Orchid platform</h1>
 
-<h2>RestApi integration (https://reqres.in/), 
+<h4>RestApi integration (https://reqres.in/), 
     
 dependency injection, 
     
@@ -20,5 +20,5 @@ Roles,
     
 CRUD implementation.
  
-Documentation: https://orchid.software/en/docs/</h2>
+Documentation: https://orchid.software/en/docs/</h4>
 

@@ -8,7 +8,17 @@
 </p>
 <h1>Implementation of Laravel Orchid platform</h1>
 
-<h2>RestApi integration (https://reqres.in/), dependency injection, Service, custom filter, custom sort, custom pagination, Roles, CRUD implementation.
+<h2>RestApi integration (https://reqres.in/), 
+    
+dependency injection, 
+    
+Service, 
+    
+custom filter, custom sort, custom pagination, 
+    
+Roles, 
+    
+CRUD implementation.
  
- Documentation: https://orchid.software/en/docs/</h2>
+Documentation: https://orchid.software/en/docs/</h2>
 

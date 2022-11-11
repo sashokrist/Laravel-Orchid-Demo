@@ -8,10 +8,8 @@
 </p>
 <h1>ORCHID DEMO</h1>
 
-<h2>Implementation of Orchid</h2>
+<h2>Implementation of Laravel Orchid platform- Documentation - https://orchid.software/en/docs/</h2>
 
 RestApi integration, dependency injection, Service, custom filter, custom sort, custom pagination, Roles, CRUD implementation.
-
-Documentation - https://orchid.software/en/docs/
 
 REST Api - https://reqres.in/

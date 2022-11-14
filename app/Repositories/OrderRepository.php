@@ -27,9 +27,14 @@ class OrderRepository implements OrderRepositoryInterface
         Order::destroy($orderId);
     }
 
-    public function createOrder(array $orderDetails)
+    public function createOrder(array $orderDetails, $client = [], $product_id = [])
     {
-        return Order::create($orderDetails);
+       // dd(\request()->all());
+        return Order::create([
+            'details' => $orderDetails,
+            'client' => $client,
+            'product_id' => $product_id
+        ]);
     }
 
     public function updateOrder($orderId, array $newDetails)

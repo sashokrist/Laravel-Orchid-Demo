@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Product;
 
+use App\Interfaces\OrderRepositoryInterface;
+use App\Models\Order;
 use App\Models\Product;
 use App\Notifications\TaskCompleted;
 use App\Orchid\Filters\TagFilter;
@@ -11,6 +13,7 @@ use App\Orchid\Layouts\Product\ProductFilterLayout;
 use App\Orchid\Layouts\Product\ProductListLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Sight;
@@ -90,6 +93,11 @@ class ProductListScreen extends Screen
     {
         return [
             ModalToggle::make('Create Product')->modal('addProduct')->method('saveProduct'),
+            Button::make(__('buy'))
+                ->icon('bag')
+                ->method('buy', [
+                    'id' => \request()->id
+                ]),
         ];
     }
 
@@ -155,5 +163,18 @@ class ProductListScreen extends Screen
         Product::findOrFail($request->get('id'))->delete();
 
         Toast::info(__('Product was removed'));
+    }
+
+    /**
+     */
+    public function buy(Request $request)
+    {
+        Order::create([
+            'details' => 'new order',
+            'client' => auth()->user()->name,
+            'product_id' => $request->id,
+        ]);
+        Toast::info(__('Order was added'));
+        return redirect()->back();
     }
 }

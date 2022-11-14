@@ -74,6 +74,7 @@ class OrderListScreen extends Screen
 
     public function store(Request $request): JsonResponse
     {
+        dd('store');
         $orderDetails = $request->only([
             'client',
             'details'

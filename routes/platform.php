@@ -134,6 +134,15 @@ Route::screen('orders', OrderListScreen::class)
             ->parent('platform.index')
             ->push(__('Orders'), route('platform.orders'));
     });
+Route::screen('orders-store', OrderListScreen::class, 'store')->name('platform.orders.store');
+
+//Route::screen('orders/store', OrderListScreen::class)
+//    ->name('platform.orders.store')
+//    ->breadcrumbs(function (Trail $trail) {
+//        return $trail
+//            ->parent('platform.products')
+//            ->push(__('Buy'), route('platform.orders.store'));
+//    });
 //Route::screen('orders/{id}', [OrderController::class, 'show']);
 //Route::screen('orders', [OrderListScreen::class, 'store']);
 //Route::screen('orders/{id}', [OrderListScreen::class, 'update']);

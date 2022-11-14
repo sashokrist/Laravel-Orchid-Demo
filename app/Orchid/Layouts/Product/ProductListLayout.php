@@ -6,6 +6,7 @@ use App\Models\Product;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
@@ -29,6 +30,13 @@ class ProductListLayout extends Table
     protected function columns(): iterable
     {
         return [
+            TD::make('Buy.', 'BUY')->render(function (Product $product){
+                return   Button::make(__('Buy'))
+                    ->icon('bag')
+                    ->method('Buy', [
+                        'id' => $product->id,
+                    ]);
+            }),
             TD::make('title', 'Title')->width('150px')->cantHide()->filter(TD::FILTER_TEXT)->sort()
                 ->render(function (Product $product){
                     return Link::make($product->title)
